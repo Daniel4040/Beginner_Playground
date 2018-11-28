@@ -1,28 +1,29 @@
-# We want to be able to determine your max EVA level by listing as many scenic places as you have been before
+# Welcome to the EVA Calculator Prototype. Here we determine your max EVA level (up to 10)
 
-# Sentry condition for the main EVA addition loop is: its been acquired = in progress
-# Once you reach 10 EVA, you cannot progress any higher, so we change in progress to be false
+# Sentry for running the main EVA addition loop is: its_been_acquired == in_progress
 its_been_acquired = True
 in_progress = True
 eva = 0
+"""Once you reach 10 EVA, you cannot progress any higher, so in_progress = False which terminates the
+while in_progress = True loop"""
 
-# Sentry condition for the failed attempts loop is: when fail counter hits 3, you done son
-# Once you guess a non scenic place three total times, we deem it to be ova for you and turn in progress to false
+# Sentry for running the failed attempts check is: if not fail_counter == 3, guess again
 fail_counter = 0
 
-# Our EVA database. There is probably an easy way to store data like this in a list or some more advanced feature
-# Haven't learned how to actually make this work yet. Currently only know how to define a variable with a single string
-eva_database = "Zion" or "Bryce Canyon" or "Yosemite" or "Big Sur" or "Smokies" or "Outer Banks" or "Grand Canyon"\
-                or "SoCal" or "Boone" or "Blowing Rock" or "Asheville" or "Black Mountains" or "Rocky Mountains"\
-                or "Jackson" or "Breckenridge" or "Ouray" or "Silverton" or "Beach" or "Mountains" or "RMNP" # etc...
+# Our EVA database
+eva_database = "Zion", "Bryce Canyon", "Yosemite", "Big Sur", "Smokies", "Outer Banks", "Grand Canyon"\
+                , "SoCal", "Boone", "Blowing Rock", "Asheville", "Black Mountains", "Rocky Mountains"\
+                , "Jackson", "Breckenridge", "Ouray", "Silverton", "Beach", "Mountains", "RMNP" # etc...
+"""I wonder how to actually make a searchable list like this, where the user will be able to input something to be
+checked whether or not it is in the list"""
 
 # While loop exits on two scenarios, 1) you reach 10 EVA (lifetime max), 2) you guess wrong three times
 while its_been_acquired == in_progress:
 
-    user_input_eva_location = input("Name a scenic location you've been to: ")
+    user_input = input("Name a scenic location you've been to: ")
 
-# This if/else clause is where we determine if the location is scenic or not. It must exist in our EVA database
-    if user_input_eva_location not in eva_database:
+# This if/else clause is where we determine if the location is scenic or not. user_input must exist in our EVA database
+    if user_input not in eva_database:
 
         fail_counter = fail_counter + 1
         if fail_counter == 3:
@@ -37,6 +38,3 @@ while its_been_acquired == in_progress:
     if eva == 10:
         print("You've reached the maximum EVA, congrats! You are now a Swanson.")
         in_progress = False
-
-
-
