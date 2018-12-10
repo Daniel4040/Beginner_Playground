@@ -1,0 +1,59 @@
+""" Hi, and welcome to the Reversed Arr Sep. This program was created By Daniel4040 in December 2018 as Day 7
+of the Hacker Rank 30 Days Of Code Challenge, using Python 3.7. The program uses cascading functions
+that will take any number of integer inputs, create an array out of them, reverse the order of the array,
+and print the final results as a single line of space separated elements. Note that it would be useful to
+create a "userinput" function to store the value of n if you want to do more than one thing with n. """
+
+
+# Step 1: Create a function to build the initial array based on user input
+def array_generator():
+
+    # User defines number of array elements, then inputs those elements, separated by a space, on next line
+    n = int(input())
+
+    # Initialize a new local variable as an empty list. I will append values to this list in the next step.
+    makeArray = []
+
+    # Create the initial array that contains all the user-specified elements
+    makeArray += list(map(int, input().rstrip().split()))
+    """ - Using .rstrip().split() will remove whitespace between the inputs while keeping the values unique
+        - The map function stores the inputs and returns an iterator (an index) for each input
+        - In order to add every input into a single array, I must assign the stored value within each
+          iterator into a list using the list() function"""
+
+    # The function must return some value in order to pass it to other functions, otherwise "None" passed
+    return makeArray
+
+
+# Step 2: Take the initial array and reverse it
+def array_reversal():
+
+    # Here I try cascading functions, i.e. pass the result of the previous function into here
+    makeArray = array_generator()
+
+    # Now reverse the initial array. I did this with a list slicing w/reverse step technique
+    reverseArray = makeArray[::-1]
+
+    # Let's pass the reversed array into the final function/final step
+    return reverseArray
+
+
+# Step 3: Print all reversed array elements onto a single line, with each element separated by a space
+def reversed_array_separator():
+
+    # Pass the result of the previous function into here to manipulate it.
+    reverseArray = array_reversal()
+
+    # Initialize a new variable as a blank string for now
+    lineOutput = ""
+
+    # Run through every element in the array, printing it onto the end of the existing string
+    for i in range(len(reverseArray)):
+        lineOutput += (str(reverseArray[i]) + " ")
+
+    # Store the result so we can use it later
+    return lineOutput
+
+
+# Final Step: Call the final function. Note: Keep in mind this will prompt user input.
+print(reversed_array_separator())
